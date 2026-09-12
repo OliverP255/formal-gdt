@@ -2,7 +2,7 @@
 
 ## Background
 
-GD&T has been in use by engineers and manufacturers for over 85 years. It is a precise, standardized symbolic language for communicating how much a manufactured part is allowed to vary from its original, intended design.
+GD&T has been used by engineers and manufacturers for over 85 years. It's a precise, standardized symbolic language for communicating how much a manufactured part is allowed to vary from its original, intended design.
 
 For example, you might annotate a line in your design with the following GD&T:
 
@@ -12,9 +12,7 @@ For example, you might annotate a line in your design with the following GD&T:
 
 This means that the indicated surface line element must lie within a straightness zone with tolerance 0.05.
 
-<div align="center">
-  <img src="cylindrical_straightness_zone_0_05.png" alt="Cylindrical straightness zone with diameter 0.05" width="500">
-</div>
+![Cylindrical straightness zone with diameter 0.05](cylindrical_straightness_zone_0_05.png)
 
 Note: The units, here aren't specified by the GD&T symbol itself. They are chosen by the engineer when drawing the design. All geometric definitions underlying these requirements are described rigorously (but not formally) in ASME Y14.5.1.
 
