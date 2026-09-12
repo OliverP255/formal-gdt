@@ -17,7 +17,7 @@ GD&T has been used by engineers and manufacturers for over 85 years. It's a prec
 For example, you might annotate a line in your design with the following GD&T:
 
 ```
-│ ─ │ Ø0.05 │
+│ ─ │ Ø 0.05 │
 ```
 
 This means that the indicated surface line element must lie within a straightness zone with tolerance 0.05.
