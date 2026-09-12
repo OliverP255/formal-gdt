@@ -1,5 +1,15 @@
 # formal-gdt
 
+A Lean 4 + Mathlib formalisation of the definitions in
+**ASME Y14.5.1**.
+
+Every definition is stated against an exact quote taken from the standard
+(see [`Y14.5.1-definitions.md`](Y14.5.1-definitions.md)), then proved to
+have the same properties as claimed in the standard.
+
+Sections of Y14.5.1 covered: `<FILL THIS IN §§>`. The project is sorry-free.
+
+
 ## Background
 
 GD&T has been used by engineers and manufacturers for over 85 years. It's a precise, standardized symbolic language for communicating how much a manufactured part is allowed to vary from its original, intended design.
@@ -43,3 +53,8 @@ T = H - F
 Where H = diameter of the hole and F = diameter of the fastener.
 
 By formalising in Lean, we're able to show formally, under what cases, this formula holds and when it doesn't.
+
+
+## In Context
+
+This repo is part of a larger aim to make engineering compliance machine-checkable by formalising engineering standards and tools in Lean 4. 
