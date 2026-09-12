@@ -12,6 +12,10 @@ For example, you might annotate a line in your design with the following GD&T:
 
 This means that the indicated surface line element must lie within a straightness zone with tolerance 0.05.
 
+<div align="center">
+  <img src="cylindrical_straightness_zone_0_05.png" alt="Cylindrical straightness zone with diameter 0.05" width="500">
+</div>
+
 Note: The units, here aren't specified by the GD&T symbol itself. They are chosen by the engineer when drawing the design. All geometric definitions underlying these requirements are described rigorously (but not formally) in ASME Y14.5.1.
 
 For example, Y14.5.1 defines the straightness zone for a derived median line as a cylindrical zone whose diameter is the specified tolerance.
