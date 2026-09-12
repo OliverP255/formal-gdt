@@ -1,0 +1,21 @@
+# Lean build artifacts (7.6 GB; regenerate with `lake exe cache get && lake build`)
+/.lake/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# Copyrighted source standards — purchased from ASME, not redistributable.
+# Obtain from https://www.asme.org/codes-standards
+ASME-Y14.5.1-2019.pdf
+ASME-Y14.5-2019-Appendix-B.pdf
+*.pdf
+!paper.pdf
+
+# macOS
+.DS_Store

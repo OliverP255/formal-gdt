@@ -1,0 +1,35 @@
+MIT License
+
+Copyright (c) 2026 Oliver Pryce
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+SCOPE OF THIS LICENSE
+
+The MIT grant above covers the Lean 4 source in `GDT/` and `GDT.lean`, the
+paper source `paper.tex`, and `README.md`.
+
+It does NOT cover the passages in `Y14.5.1-definitions.md` that are quoted from
+ASME Y14.5.1-2019 and ASME Y14.5-2009. Those remain the copyright of the
+American Society of Mechanical Engineers and are reproduced here for reference
+and scholarly commentary. They are not licensed for redistribution by this
+project. The standards themselves are available for purchase from ASME at
+https://www.asme.org/codes-standards
