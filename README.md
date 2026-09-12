@@ -42,7 +42,7 @@ Formalisation gives us a way to turn these definitions into objects and proposit
 
 I formalise the main definitions, "theorems", and best practices of ASME Y14.5 using Lean. (I've extracted the formalised sections and put them in Y14.5.1-definitions.md)
 
-I put "theorems" in quotes here because we don't really have theorems, we have mathematical practices that engineers must follow.
+I put "theorems" in quotes here because we don't really have theorems, we have mathematical practices that engineers are required follow.
 
 For example, one simple mathematical practice is the fastener formula which tells you the maximum positional tolerance (T) you're allowed to give to a hole when using a fastener (screw, bolt, nut, washer, etc.).
 
