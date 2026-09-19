@@ -1,5 +1,5 @@
 /-
-# Position Tolerance — ASME Y14.5.1 §7.2
+# Position Tolerance, ASME Y14.5.1 §7.2
 
 Position tolerance zone: the resolved geometry (axis) of the
 feature must lie within a cylindrical zone of specified diameter,

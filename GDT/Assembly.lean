@@ -42,7 +42,7 @@ noncomputable section
     **Note on parameter ranges**: The definition does not require `0 ≤ r_F` or
     `0 < r_H`. The sufficiency theorems do not add these as hypotheses either,
     because `hT : T ≤ 2*(r_H - r_F)` (floating) or `hT : T ≤ r_H - r_F` (fixed)
-    already implies `r_H ≥ r_F` — the physical constraint that the hole is at least
+    already implies `r_H ≥ r_F`, the physical constraint that the hole is at least
     as large as the fastener. An explicit `0 ≤ r_F` would be logically redundant
     given `hT` and would trigger the unused-variable linter. The intended physical
     domain is `0 ≤ r_F < r_H`; the tightness theorems require `r_F < r_H` via
@@ -218,8 +218,8 @@ theorem one_lt_inv_cos {α : ℝ} (h0 : 0 < α) (hpi : α < Real.pi / 2) :
     tilted fastener does not fit.
 
     This is the formal content of §B.4's qualification "When Projected Tolerance Zone
-    Is Used". Without a projected tolerance zone — or some other guarantee of zero
-    tilt — the formula `T = (H−F)/2` does not imply assembly. -/
+    Is Used". Without a projected tolerance zone, or some other guarantee of zero
+    tilt, the formula `T = (H−F)/2` does not imply assembly. -/
 theorem fixed_fastener_tilt_counterexample
     {r_H r_F k : ℝ} (hrF : 0 < r_F) (hHF : r_F < r_H) (hk : 1 < k) :
     ∃ c_f c_h : ℝ,

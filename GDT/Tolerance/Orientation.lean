@@ -1,5 +1,5 @@
 /-
-# Orientation Tolerances — ASME Y14.5.1 §6.4
+# Orientation Tolerances, ASME Y14.5.1 §6.4
 
 Planar and cylindrical orientation zones, per §6.4.1 and §6.4.2.
 
@@ -19,7 +19,7 @@ structure DatumDir where
   dir : Vec3
   unit : ‖dir‖ = 1
 
-/-! ## Planar Orientation — Y14.5.1 §6.4.1 -/
+/-! ## Planar Orientation, Y14.5.1 §6.4.1 -/
 
 /-- A set `S` satisfies a planar orientation tolerance `t` relative to a datum
     plane (with normal `datum.dir`) at basic angle `θ` when it lies between two
@@ -63,7 +63,7 @@ theorem planarOrientation_subset {S S' : Set Point3} {t : ℝ} {d : DatumDir} {�
   obtain ⟨n, c, hn, hang, hS⟩ := h
   exact ⟨n, c, hn, hang, fun p hp => hS p (hsub hp)⟩
 
-/-! ## Cylindrical Orientation — Y14.5.1 §6.4.2 -/
+/-! ## Cylindrical Orientation, Y14.5.1 §6.4.2 -/
 
 /-- A set `S` satisfies a cylindrical orientation tolerance `t` relative to a
     datum axis (direction `datum.dir`) at basic angle `θ` when its axis lies

@@ -1,5 +1,5 @@
 /-
-# Hierarchy of Controls — ASME Y14.5.1 §6.2
+# Hierarchy of Controls, ASME Y14.5.1 §6.2
 
 Y14.5.1 §6.2 states:
 
@@ -16,7 +16,7 @@ We prove the formal versions of these containment relationships:
   satisfiesPosition (aligned datum)  ⟹  satisfiesCylindricalOrientation
 
 The proof in each case is that the witness for the stronger control is also
-a valid witness for the weaker one — the extra constraint (datum angle or true
+a valid witness for the weaker one, the extra constraint (datum angle or true
 position) is simply dropped.
 -/
 

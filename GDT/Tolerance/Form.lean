@@ -1,5 +1,5 @@
 /-
-# Form Tolerances — ASME Y14.5.1 §5.4
+# Form Tolerances, ASME Y14.5.1 §5.4
 
 Definitions and basic theorems for the four form tolerances:
 flatness, straightness, circularity, cylindricity.
@@ -21,7 +21,7 @@ import Mathlib.Analysis.InnerProductSpace.Basic
 
 noncomputable section
 
-/-! ## Flatness — Y14.5.1 §5.4.2 -/
+/-! ## Flatness, Y14.5.1 §5.4.2 -/
 
 /-- A set `S` satisfies a flatness tolerance `t` if it lies between
     two parallel planes separated by `t`. Per Y14.5.1 §5.4.2.1.
@@ -53,13 +53,13 @@ theorem plane_satisfies_flatness_zero (n : Vec3) (c : ℝ) (hn : ‖n‖ = 1) :
     satisfiesFlatness {p : Point3 | @inner ℝ _ _ n p = c} 0 :=
   ⟨n, c, hn, fun p hp => by simp [Set.mem_ofPred_eq.mp hp]⟩
 
-/-! ## Straightness — Y14.5.1 §5.4.1 -/
+/-! ## Straightness, Y14.5.1 §5.4.1 -/
 
 /-- A set `S` satisfies a straightness tolerance `t` if it lies within
     a cylinder of diameter `t` around some line. Per Y14.5.1 §5.4.1.1.
 
     **Note on generality**: §5.4.1.1 applies this zone to the *derived median line*
-    of a cylindrical feature — a specific geometric construction from the feature's
+    of a cylindrical feature, a specific geometric construction from the feature's
     surface points, which we do not formalize. §5.4.1.3 (straightness of surface line
     elements) applies a related zone under additional cutting-plane constraints, also
     not formalized. Our definition is stated for an arbitrary point set `S` and is
@@ -79,7 +79,7 @@ theorem straightness_subset {S S' : Set Point3} {t : ℝ}
   obtain ⟨L, hS⟩ := h
   exact ⟨L, fun p hp => hS p (hsub hp)⟩
 
-/-! ## Circularity — Y14.5.1 §5.4.3
+/-! ## Circularity, Y14.5.1 §5.4.3
 
 NOTE: Y14.5.1 allows curved spines; we restrict to a single cross-section. -/
 
@@ -110,7 +110,7 @@ theorem circularity_subset {S S' : Set Point3} {t : ℝ}
   obtain ⟨c, n, r, hn, hr, hS⟩ := h
   exact ⟨c, n, r, hn, hr, fun p hp => hS p (hsub hp)⟩
 
-/-! ## Cylindricity — Y14.5.1 §5.4.4 -/
+/-! ## Cylindricity, Y14.5.1 §5.4.4 -/
 
 /-- A set `S` satisfies a cylindricity tolerance `t` if it lies between
     two coaxial cylinders of radii `r ± t/2`. Per Y14.5.1 §5.4.4.
