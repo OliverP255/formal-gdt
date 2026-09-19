@@ -10,12 +10,15 @@
 *.fls
 *.fdb_latexmk
 
+# Paper (not part of this repo)
+paper.pdf
+paper.tex
+
 # Copyrighted source standards — purchased from ASME, not redistributable.
 # Obtain from https://www.asme.org/codes-standards
 ASME-Y14.5.1-2019.pdf
 ASME-Y14.5-2019-Appendix-B.pdf
 *.pdf
-!paper.pdf
 
 # macOS
 .DS_Store
