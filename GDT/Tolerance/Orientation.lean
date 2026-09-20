@@ -13,18 +13,18 @@ import GDT.Geometry.Line
 
 noncomputable section
 
-/-- A datum direction: a unit vector hat(D_1) as used in Y14.5.1 §6.4.1–6.4.2.
+/-- A datum direction: a unit vector hat(D_1) as used in §6.4.1–6.4.2.
     Models either a datum axis direction or a datum plane normal. -/
 structure DatumDir where
   dir : Vec3
   unit : ‖dir‖ = 1
 
-/-! ## Planar Orientation, Y14.5.1 §6.4.1 -/
+/-! ## Planar Orientation (§6.4.1) -/
 
 /-- A set S satisfies a planar orientation tolerance t relative to a datum
     plane (with normal datum.dir) at basic angle θ when it lies between two
-    parallel planes separated by t and oriented at angle θ to the datum.
-    Per Y14.5.1 §6.4.1 (Y14.5.1-definitions.md#planar-orientation).
+    parallel planes separated by t and oriented at angle θ to the datum
+    (§6.4.1, Y14.5.1-definitions.md#planar-orientation).
 
     §6.4.1(a) Definition:
 
@@ -63,12 +63,12 @@ theorem planarOrientation_subset {S S' : Set Point3} {t : ℝ} {d : DatumDir} {�
   obtain ⟨n, c, hn, hang, hS⟩ := h
   exact ⟨n, c, hn, hang, fun p hp => hS p (hsub hp)⟩
 
-/-! ## Cylindrical Orientation, Y14.5.1 §6.4.2 -/
+/-! ## Cylindrical Orientation (§6.4.2) -/
 
 /-- A set S satisfies a cylindrical orientation tolerance t relative to a
     datum axis (direction datum.dir) at basic angle θ when its axis lies
-    within a cylinder of diameter t oriented at angle θ to the datum.
-    Per Y14.5.1 §6.4.2 (Y14.5.1-definitions.md#cylindrical-orientation).
+    within a cylinder of diameter t oriented at angle θ to the datum
+    (§6.4.2, Y14.5.1-definitions.md#cylindrical-orientation).
 
     §6.4.2(a) Definition:
 

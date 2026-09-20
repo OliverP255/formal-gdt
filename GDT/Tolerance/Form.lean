@@ -1,18 +1,8 @@
 /-
-# Form Tolerances, ASME Y14.5.1 §5.4
+Form Tolerances, ASME Y14.5.1 §5.4
 
 Definitions and basic theorems for the four form tolerances:
 flatness, straightness, circularity, cylindricity.
-
-Key results:
-- bounded_deviation_flatness: process capability δ → tolerance 2δ suffices
-- cylindricity_implies_circularity: cross-sections inherit the tolerance
-
-**Note on tolerance sign**: All definitions allow t < 0. For t < 0 and
-non-empty S, the zone condition |expr| ≤ t/2 < 0 is unsatisfiable, so
-satisfiesFlatness S t etc. are False. For empty S they are vacuously True.
-The standard implicitly assumes t ≥ 0; we do not add this as a hypothesis because
-the monotone theorems hold for all t and the definitions are otherwise consistent.
 -/
 
 import GDT.Basic
@@ -21,12 +11,11 @@ import Mathlib.Analysis.InnerProductSpace.Basic
 
 noncomputable section
 
-/-! ## Flatness, Y14.5.1 §5.4.2 -/
+/-! ## Flatness (§5.4.2) -/
 
 /-- A set S satisfies a flatness tolerance t if it lies between
-    two parallel planes separated by t. Per Y14.5.1 §5.4.2.1.
+    two parallel planes separated by t (§5.4.2.1). -/
 
-    The zone is { P⃗ | |n̂ · (P⃗ - A⃗)| ≤ t/2 } where n̂ is the unit normal. -/
 def satisfiesFlatness (S : Set Point3) (t : ℝ) : Prop :=
   ∃ (n : Vec3) (c : ℝ), ‖n‖ = 1 ∧
     ∀ p ∈ S, |@inner ℝ _ _ n p - c| ≤ t / 2
@@ -53,19 +42,10 @@ theorem plane_satisfies_flatness_zero (n : Vec3) (c : ℝ) (hn : ‖n‖ = 1) :
     satisfiesFlatness {p : Point3 | @inner ℝ _ _ n p = c} 0 :=
   ⟨n, c, hn, fun p hp => by simp [Set.mem_ofPred_eq.mp hp]⟩
 
-/-! ## Straightness, Y14.5.1 §5.4.1 -/
+/-! ## Straightness (§5.4.1) -/
 
 /-- A set S satisfies a straightness tolerance t if it lies within
-    a cylinder of diameter t around some line. Per Y14.5.1 §5.4.1.1.
-
-    **Note on generality**: §5.4.1.1 applies this zone to the *derived median line*
-    of a cylindrical feature, a specific geometric construction from the feature's
-    surface points, which we do not formalize. §5.4.1.3 (straightness of surface line
-    elements) applies a related zone under additional cutting-plane constraints, also
-    not formalized. Our definition is stated for an arbitrary point set S and is
-    therefore more general than either application: a caller supplies whichever point
-    set the standard's construction yields. The containment theorems below hold for
-    any such S. -/
+    a cylinder of diameter t around some line. (§5.4.1.1) -/
 def satisfiesStraightness (S : Set Point3) (t : ℝ) : Prop :=
   ∃ (L : Line3), ∀ p ∈ S, distToLine p L ≤ t / 2
 
@@ -79,12 +59,11 @@ theorem straightness_subset {S S' : Set Point3} {t : ℝ}
   obtain ⟨L, hS⟩ := h
   exact ⟨L, fun p hp => hS p (hsub hp)⟩
 
-/-! ## Circularity, Y14.5.1 §5.4.3
-
+/- Circularity (§5.4.3)
 NOTE: Y14.5.1 allows curved spines; we restrict to a single cross-section. -/
 
 /-- A set S satisfies a circularity tolerance t if it lies in a
-    coplanar annular region of width t. Per Y14.5.1 §5.4.3.
+    coplanar annular region of width t (§5.4.3).
 
     The zone requires both coplanarity (hat(T) . (P - A) = 0) and the
     annular bound (| ||P - A|| - r | <= t/2).
@@ -110,18 +89,15 @@ theorem circularity_subset {S S' : Set Point3} {t : ℝ}
   obtain ⟨c, n, r, hn, hr, hS⟩ := h
   exact ⟨c, n, r, hn, hr, fun p hp => hS p (hsub hp)⟩
 
-/-! ## Cylindricity, Y14.5.1 §5.4.4 -/
+/-! ## Cylindricity (§5.4.4) -/
 
 /-- A set S satisfies a cylindricity tolerance t if it lies between
-    two coaxial cylinders of radii r ± t/2. Per Y14.5.1 §5.4.4.
+    two coaxial cylinders of radii r ± t/2 (§5.4.4).
 
-    The standard states the zone is | |hat(T) x (P - A)| - r | <= t/2 with
-    r described only as "the radial distance from the cylindricity axis to the
-    center of the zone" and no lower bound specified. We add 0 ≤ r to exclude
-    the degenerate case where the inner cylinder would have negative radius, which
-    the standard precludes geometrically but not algebraically. For circularity
-    (§5.4.3), the standard itself requires r > 0 for all circular elements; we
-    apply the same convention here for consistency. -/
+    The standard states the zone is | |hat(T) x (P - A)| - r | <= t/2.
+
+    r is "the radial distance from the cylindricity axis to the
+    center of the zone". -/
 def satisfiesCylindricity (S : Set Point3) (t : ℝ) : Prop :=
   ∃ (L : Line3) (r : ℝ), 0 ≤ r ∧
     ∀ p ∈ S, |distToLine p L - r| ≤ t / 2
@@ -136,12 +112,7 @@ theorem cylindricity_subset {S S' : Set Point3} {t : ℝ}
   obtain ⟨L, r, hr, hS⟩ := h
   exact ⟨L, r, hr, fun p hp => hS p (hsub hp)⟩
 
-/-! ## cylindricity ⟹ circularity
-
-The key insight: for a point p in a cutting plane perpendicular to the axis L
-at a point a on L, we have distToLine p L = dist a p. This is because the
-orthogonal projection of (p - L.point) onto L.dir places us at a, so the
-residual is exactly p - a, and its norm is dist a p.
+/- cylindricity implies circularity
 
 We state this in a form that avoids needing the cutting-plane machinery:
 given a cylindricity witness (L, r), any point with distToLine p L bounded

@@ -1,6 +1,5 @@
 /-
 # Lines in ℝ³ and distance-to-line
-
 Distance from a point to a line, defined via orthogonal projection residual.
 -/
 
@@ -50,12 +49,8 @@ theorem distToLine_translate (p : Point3) (L : Line3) (s : ℝ) :
 
 /-! ## Cross-product bridge lemma
 
-Why this is needed: distToLine is defined via projection residual to avoid
-cross-product API friction. But Y14.5.1 §5.4.1.1, §5.4.4, and §7.2.2 all state
-their tolerance zones using |hat(T) x (P - A)|. Without a proof that these are
-equal, three definitions (satisfiesStraightness, satisfiesCylindricity,
-satisfiesPosition) only match the standard up to an unverified equivalence claim.
-This lemma closes that gap: it proves equality holds for any Line3 (unit direction).
+Why this is needed: distToLine is defined using projections (using dot product), native in Mathlib EuclideanSpace.
+We use this to avoid needing cross product which is defined on Fin 3 -> R. 
 -/
 
 /-- The squared distance to a line equals ‖v‖² − ⟨v, d⟩²
@@ -73,13 +68,7 @@ private lemma distToLine_sq (p : Point3) (L : Line3) :
     rw [norm_smul, mul_pow, Real.norm_eq_abs, sq_abs, hunit, mul_one]
   linarith [norm_sub_sq_real v (c • L.dir)]
 
-/-- **Cross-product bridge lemma.** The projection-residual definition of
-    distToLine equals the norm of the cross product L.dir × (p − L.point),
-    matching the |hat(T) x (P − A)| formula used in Y14.5.1.
-
-    The cross product of EuclideanSpace ℝ (Fin 3) elements uses ofLp to
-    coerce to Fin 3 → ℝ (where ⨯₃ is defined) and toLp 2 to return to
-    the Euclidean space type. -/
+/-- Cross-product bridge lemma -/
 theorem distToLine_eq_norm_cross (p : Point3) (L : Line3) :
     distToLine p L =
     ‖(toLp 2 (ofLp L.dir ⨯₃ ofLp (p - L.point)) : EuclideanSpace ℝ (Fin 3))‖ := by

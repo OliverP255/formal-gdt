@@ -10,8 +10,8 @@ import GDT.Geometry.Line
 
 noncomputable section
 
-/-- Position tolerance, per Y14.5.1 §7.2.2, "In Terms of the Resolved
-    Geometry of a Feature" (Y14.5.1-definitions.md#position-resolved).
+/-- Position tolerance, "In Terms of the Resolved Geometry of a Feature"
+    (§7.2.2, Y14.5.1-definitions.md#position-resolved).
 
     §7.2.2(a) Definition, on what the zone constrains:
 

@@ -1,7 +1,7 @@
 /-
 # Hierarchy of Controls, ASME Y14.5.1 §6.2
 
-Y14.5.1 §6.2 states:
+§6.2 states:
 
 > An orientation tolerance, when applied to a plane surface, controls flatness
 > to the extent of the orientation tolerance. When the flatness control in the
@@ -73,7 +73,7 @@ theorem satisfiesPlanarOrientation_iff
 
 /-! ## Orientation controls form (§6.2) -/
 
-/-- **Planar orientation implies flatness** (ASME Y14.5.1 §6.2).
+/-- **Planar orientation implies flatness** (§6.2).
     The orientation zone is a flatness zone with an additional datum angle
     constraint on the zone direction. Dropping the constraint gives flatness. -/
 theorem orientation_controls_flatness
@@ -83,7 +83,7 @@ theorem orientation_controls_flatness
   obtain ⟨n, c, hn, _, hS⟩ := h
   exact ⟨n, c, hn, hS⟩
 
-/-- **Cylindrical orientation implies straightness** (ASME Y14.5.1 §6.2).
+/-- **Cylindrical orientation implies straightness** (§6.2).
     The cylindrical orientation zone is a straightness zone with an additional
     datum angle constraint on the axis direction. Dropping the constraint gives
     straightness. -/
