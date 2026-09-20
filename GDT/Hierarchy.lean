@@ -3,21 +3,17 @@
 
 §6.2 states:
 
-> An orientation tolerance, when applied to a plane surface, controls flatness
-> to the extent of the orientation tolerance. When the flatness control in the
-> orientation tolerance is not sufficient, a separate flatness tolerance should
-> be considered. An orientation tolerance does not control the location of
-> features. [6.2]
+"An orientation tolerance, when applied to a plane surface, controls flatness
+to the extent of the orientation tolerance. When the flatness control in the
+orientation tolerance is not sufficient, a separate flatness tolerance should
+be considered. An orientation tolerance does not control the location of
+features."
 
-We prove the formal versions of these containment relationships:
+We prove these relationships:
 
   satisfiesPlanarOrientation  ⟹  satisfiesFlatness
   satisfiesCylindricalOrientation  ⟹  satisfiesStraightness
   satisfiesPosition (aligned datum)  ⟹  satisfiesCylindricalOrientation
-
-The proof in each case is that the witness for the stronger control is also
-a valid witness for the weaker one, the extra constraint (datum angle or true
-position) is simply dropped.
 -/
 
 import GDT.Tolerance.Form
@@ -50,11 +46,7 @@ theorem satisfiesFlatness_iff (S : Set Point3) (t : ℝ) :
 
 /-! ## Planar orientation equivalence: scalar-offset vs. reference-point form -/
 
-/-- satisfiesPlanarOrientation is equivalent to the standard's reference-point form.
-
-    Analogous to satisfiesFlatness_iff: with c = ⟨n, A⟩ the zone conditions
-    |inner n p − c| ≤ t/2 and |inner n (p − A)| ≤ t/2 are the same. The angle
-    constraint |inner n datum.dir| = |sin θ| is unchanged in both directions. -/
+/-- satisfiesPlanarOrientation is equivalent to the standard's reference-point form. -/
 theorem satisfiesPlanarOrientation_iff
     (S : Set Point3) (t : ℝ) (datum : DatumDir) (θ : ℝ) :
     satisfiesPlanarOrientation S t datum θ ↔
@@ -73,9 +65,7 @@ theorem satisfiesPlanarOrientation_iff
 
 /-! ## Orientation controls form (§6.2) -/
 
-/-- **Planar orientation implies flatness** (§6.2).
-    The orientation zone is a flatness zone with an additional datum angle
-    constraint on the zone direction. Dropping the constraint gives flatness. -/
+/-- Planar orientation implies flatness (§6.2). -/
 theorem orientation_controls_flatness
     {S : Set Point3} {t : ℝ} {datum : DatumDir} {θ : ℝ}
     (h : satisfiesPlanarOrientation S t datum θ) :
@@ -83,10 +73,7 @@ theorem orientation_controls_flatness
   obtain ⟨n, c, hn, _, hS⟩ := h
   exact ⟨n, c, hn, hS⟩
 
-/-- **Cylindrical orientation implies straightness** (§6.2).
-    The cylindrical orientation zone is a straightness zone with an additional
-    datum angle constraint on the axis direction. Dropping the constraint gives
-    straightness. -/
+/-- Cylindrical orientation implies straightness (§6.2). -/
 theorem orientation_controls_straightness
     {S : Set Point3} {t : ℝ} {datum : DatumDir} {θ : ℝ}
     (h : satisfiesCylindricalOrientation S t datum θ) :
@@ -96,14 +83,7 @@ theorem orientation_controls_straightness
 
 /-! ## Position controls orientation -/
 
-/-- **Position implies cylindrical orientation** (for an aligned datum).
-    When the true-position axis is parallel (or anti-parallel) to the datum
-    direction, the cylindrical position zone is a cylindrical orientation zone
-    with basic angle θ = 0.
-
-    The angle constraint |cos 0| = 1 is satisfied because parallel unit vectors
-    have inner product ±1. The point-set constraint is unchanged: both use
-    distToLine p L ≤ t/2 with the same axis and the same tolerance. -/
+/-- Position implies cylindrical orientation (for aligned datum). -/
 theorem position_controls_cylindrical_orientation
     {S : Set Point3} {t : ℝ} {truePos : Line3} {datum : DatumDir}
     (hpar : truePos.dir = datum.dir ∨ truePos.dir = -datum.dir)

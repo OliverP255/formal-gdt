@@ -13,9 +13,7 @@ noncomputable section
 
 /-! ## Flatness (§5.4.2) -/
 
-/-- A set S satisfies a flatness tolerance t if it lies between
-    two parallel planes separated by t (§5.4.2.1). -/
-
+/-- flatness tolerance (t): lies between two parallel planes separated by t. (§5.4.2.1) -/
 def satisfiesFlatness (S : Set Point3) (t : ℝ) : Prop :=
   ∃ (n : Vec3) (c : ℝ), ‖n‖ = 1 ∧
     ∀ p ∈ S, |@inner ℝ _ _ n p - c| ≤ t / 2
@@ -30,22 +28,20 @@ theorem flatness_subset {S S' : Set Point3} {t : ℝ}
   obtain ⟨n, c, hn, hS⟩ := h
   exact ⟨n, c, hn, fun p hp => hS p (hsub hp)⟩
 
-/-- If every point of S has signed distance at most δ from some plane,
-    then S satisfies flatness tolerance 2δ. -/
+/-- points within δ of some plane satisfy flatness 2δ. -/
 theorem bounded_deviation_flatness {S : Set Point3} {δ : ℝ} {n : Vec3} {c : ℝ}
     (hn : ‖n‖ = 1) (hbound : ∀ p ∈ S, |@inner ℝ _ _ n p - c| ≤ δ) :
     satisfiesFlatness S (2 * δ) :=
   ⟨n, c, hn, fun p hp => by linarith [hbound p hp]⟩
 
-/-- A perfect plane satisfies flatness 0. -/
+/-- a perfect plane satisfies flatness 0. -/
 theorem plane_satisfies_flatness_zero (n : Vec3) (c : ℝ) (hn : ‖n‖ = 1) :
     satisfiesFlatness {p : Point3 | @inner ℝ _ _ n p = c} 0 :=
   ⟨n, c, hn, fun p hp => by simp [Set.mem_ofPred_eq.mp hp]⟩
 
 /-! ## Straightness (§5.4.1) -/
 
-/-- A set S satisfies a straightness tolerance t if it lies within
-    a cylinder of diameter t around some line. (§5.4.1.1) -/
+/-- straightness tolerance (t): lies within a cylinder of diameter t around some line. (§5.4.1.1) -/
 def satisfiesStraightness (S : Set Point3) (t : ℝ) : Prop :=
   ∃ (L : Line3), ∀ p ∈ S, distToLine p L ≤ t / 2
 
@@ -62,19 +58,10 @@ theorem straightness_subset {S S' : Set Point3} {t : ℝ}
 /- Circularity (§5.4.3)
 NOTE: Y14.5.1 allows curved spines; we restrict to a single cross-section. -/
 
-/-- A set S satisfies a circularity tolerance t if it lies in a
-    coplanar annular region of width t (§5.4.3).
+/-- circularity tolerance (t): lies in a coplanar annular region of width t. (§5.4.3)
 
-    The zone requires both coplanarity (hat(T) . (P - A) = 0) and the
-    annular bound (| ||P - A|| - r | <= t/2).
-
-    **Why coplanarity is required**: without it, the definition would be vacuous for
-    any finite S. Given points at distinct distances from a candidate in-plane center,
-    one can move the center off the plane of S along the normal until all 3-D
-    distances to it are equal, satisfying the annular bound with t = 0. Every finite
-    set lying on a sphere would then "satisfy circularity 0". The constraint
-    inner n (p - center) = 0 pins the center into the plane of the circular element,
-    which is what §5.4.3 intends. -/
+    Coplanarity is required so the definition isn't vacuous: without it, any finite
+    set on a sphere could satisfy circularity 0 by moving the center off-plane. -/
 def satisfiesCircularity (S : Set Point3) (t : ℝ) : Prop :=
   ∃ (center : Point3) (n : Vec3) (r : ℝ), ‖n‖ = 1 ∧ 0 < r ∧
     ∀ p ∈ S, @inner ℝ _ _ n (p - center) = 0 ∧ |dist center p - r| ≤ t / 2
@@ -91,13 +78,7 @@ theorem circularity_subset {S S' : Set Point3} {t : ℝ}
 
 /-! ## Cylindricity (§5.4.4) -/
 
-/-- A set S satisfies a cylindricity tolerance t if it lies between
-    two coaxial cylinders of radii r ± t/2 (§5.4.4).
-
-    The standard states the zone is | |hat(T) x (P - A)| - r | <= t/2.
-
-    r is "the radial distance from the cylindricity axis to the
-    center of the zone". -/
+/-- cylindricity tolerance (t): lies between two coaxial cylinders of radii r ± t/2. (§5.4.4) -/
 def satisfiesCylindricity (S : Set Point3) (t : ℝ) : Prop :=
   ∃ (L : Line3) (r : ℝ), 0 ≤ r ∧
     ∀ p ∈ S, |distToLine p L - r| ≤ t / 2
@@ -112,27 +93,7 @@ theorem cylindricity_subset {S S' : Set Point3} {t : ℝ}
   obtain ⟨L, r, hr, hS⟩ := h
   exact ⟨L, r, hr, fun p hp => hS p (hsub hp)⟩
 
-/- cylindricity implies circularity
-
-We state this in a form that avoids needing the cutting-plane machinery:
-given a cylindricity witness (L, r), any point with distToLine p L bounded
-has dist (closest point on axis) p bounded by the same amount. -/
-
-/-- **Cylindricity implies circularity** (simplified form):
-    if S satisfies cylindricity t with witness axis L and radius r,
-    then for any coplanar subset of S where distToLine equals dist a p
-    for some fixed a, that subset satisfies circularity t.
-
-    The caller must supply the cutting-plane normal n and prove that all
-    points of S are coplanar with the center a.
-
-    **Note on hr : 0 < r**: satisfiesCylindricity only provides 0 ≤ r, not
-    0 < r. The caller must separately establish strict positivity before applying
-    this theorem. The degenerate case r = 0 (a solid cylinder of radius t/2)
-    does not yield a valid satisfiesCircularity witness because that definition
-    requires 0 < r. A caller deriving this from a cylindricity witness should
-    rule out r = 0 by showing S is non-empty or that the feature has positive
-    radius by construction. -/
+/-- cylindricity implies circularity -/
 theorem cylindricity_implies_circularity_of_distToLine_eq_dist
     {S : Set Point3} {t : ℝ} {L : Line3} {r : ℝ} {a : Point3} {n : Vec3}
     (hn : ‖n‖ = 1)

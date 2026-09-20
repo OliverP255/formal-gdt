@@ -10,41 +10,14 @@ import GDT.Geometry.Line
 
 noncomputable section
 
-/-- Position tolerance, "In Terms of the Resolved Geometry of a Feature"
-    (§7.2.2, Y14.5.1-definitions.md#position-resolved).
+/-- position tolerance (t), "In Terms of the Resolved Geometry of a Feature" (§7.2.2):
+    the resolved axis of the feature must lie within r(vec(P)) <= t/2 of truePos.
 
-    §7.2.2(a) Definition, on what the zone constrains:
+    Formalizes the cylindrical, RFS case (Table 7-3 gives b = t_0/2 here).
 
-    > For a pattern of features of size, a position tolerance specifies that
-    > the resolved geometry (center point, axis, or center plane, as
-    > applicable) of each unrelated actual mating envelope (for features at
-    > MMC or RFS) or unrelated actual minimum material envelope (for
-    > features at LMC) must lie within a corresponding position tolerance
-    > zone.
+    Not formalized: spherical or parallel-plane tolerance zones, or the MMC/LMC cases, where b
+    depends on the mating envelope radius. -/
 
-    and on the zone itself:
-
-    > A position tolerance zone is a spherical, cylindrical, or
-    > parallel-plane volume defined by all points vec(P) that satisfy the
-    > equation r(vec(P)) <= b, where b is the radius or half-width of the
-    > tolerance zone.
-
-    This definition formalizes one instance of that family: the
-    **cylindrical** zone, taking r(vec(P)) = distToLine p truePos with
-    truePos the true-position axis, at **RFS**, for which Table 7-3 gives
-    b = t_0/2 in both rows:
-
-    > **Table 7-3 Size of Position Tolerance Zone -- Resolved Geometry
-    > Interpretation**
-    >
-    > | | | MMC | RFS | LMC |
-    > |---|---|---|---|---|
-    > | Feature Type | Internal | t_0/2 + (r_AM - r_MMC) | t_0/2 | t_0/2 + (r_LMC - r_AMM) |
-    > | Feature Type | External | t_0/2 + (r_MMC - r_AM) | t_0/2 | t_0/2 + (r_AMM - r_LMC) |
-
-    Not formalized: the spherical and parallel-plane zones, and the MMC and
-    LMC columns of Table 7-3, where b additionally depends on r_AM, r_MMC,
-    r_LMC, and r_AMM. -/
 def satisfiesPosition (S : Set Point3) (t : ℝ) (truePos : Line3) : Prop :=
   ∀ p ∈ S, distToLine p truePos ≤ t / 2
 
