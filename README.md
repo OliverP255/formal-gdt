@@ -7,7 +7,7 @@ Every definition is stated against an exact quote taken from the standard
 (see [`Y14.5.1-definitions.md`](Y14.5.1-definitions.md)), then proved to
 have the same properties as claimed in the standard.
 
-Sections of Y14.5.1 covered: `<FILL THIS IN §§>`. The project is sorry-free.
+Sections of Y14.5.1 covered: §§5.4.1.1, 5.4.1.3, 5.4.2.1, 5.4.3, 5.4.4, 6.2, 6.4.1, 6.4.2, 7.2.1, 7.2.2, 7.3, and Nonmandatory Appendix B (B.1–B.5). The project is sorry-free.
 
 
 ## Background
