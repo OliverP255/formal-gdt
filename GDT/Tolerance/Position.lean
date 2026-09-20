@@ -11,7 +11,7 @@ import GDT.Geometry.Line
 noncomputable section
 
 /-- Position tolerance, per Y14.5.1 §7.2.2, "In Terms of the Resolved
-    Geometry of a Feature" (`Y14.5.1-definitions.md#position-resolved`).
+    Geometry of a Feature" (Y14.5.1-definitions.md#position-resolved).
 
     §7.2.2(a) Definition, on what the zone constrains:
 
@@ -30,8 +30,8 @@ noncomputable section
     > tolerance zone.
 
     This definition formalizes one instance of that family: the
-    **cylindrical** zone, taking r(vec(P)) = `distToLine p truePos` with
-    `truePos` the true-position axis, at **RFS**, for which Table 7-3 gives
+    **cylindrical** zone, taking r(vec(P)) = distToLine p truePos with
+    truePos the true-position axis, at **RFS**, for which Table 7-3 gives
     b = t_0/2 in both rows:
 
     > **Table 7-3 Size of Position Tolerance Zone -- Resolved Geometry

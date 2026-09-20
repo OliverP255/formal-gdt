@@ -28,12 +28,12 @@ noncomputable section
 
 /-! ## Flatness equivalence: scalar-offset vs. reference-point form
 
-    The standard's §5.4.2.1 writes the zone as `|hat(T) . (P - A)| ≤ t/2`.
-    `satisfiesFlatness` uses `|inner n p - c| ≤ t/2`, absorbing vec(A) into the
-    scalar `c = ⟨n, A⟩`. The two forms are equivalent: setting `c = ⟨n, A⟩` gives
-    `inner n (p - A) = inner n p - ⟨n, A⟩ = inner n p - c`. -/
+    The standard's §5.4.2.1 writes the zone as |hat(T) . (P - A)| ≤ t/2.
+    satisfiesFlatness uses |inner n p - c| ≤ t/2, absorbing vec(A) into the
+    scalar c = ⟨n, A⟩. The two forms are equivalent: setting c = ⟨n, A⟩ gives
+    inner n (p - A) = inner n p - ⟨n, A⟩ = inner n p - c. -/
 
-/-- `satisfiesFlatness` is equivalent to the standard's reference-point form. -/
+/-- satisfiesFlatness is equivalent to the standard's reference-point form. -/
 theorem satisfiesFlatness_iff (S : Set Point3) (t : ℝ) :
     satisfiesFlatness S t ↔
     ∃ (n : Vec3) (A : Point3), ‖n‖ = 1 ∧
@@ -50,11 +50,11 @@ theorem satisfiesFlatness_iff (S : Set Point3) (t : ℝ) :
 
 /-! ## Planar orientation equivalence: scalar-offset vs. reference-point form -/
 
-/-- `satisfiesPlanarOrientation` is equivalent to the standard's reference-point form.
+/-- satisfiesPlanarOrientation is equivalent to the standard's reference-point form.
 
-    Analogous to `satisfiesFlatness_iff`: with `c = ⟨n, A⟩` the zone conditions
-    `|inner n p − c| ≤ t/2` and `|inner n (p − A)| ≤ t/2` are the same. The angle
-    constraint `|inner n datum.dir| = |sin θ|` is unchanged in both directions. -/
+    Analogous to satisfiesFlatness_iff: with c = ⟨n, A⟩ the zone conditions
+    |inner n p − c| ≤ t/2 and |inner n (p − A)| ≤ t/2 are the same. The angle
+    constraint |inner n datum.dir| = |sin θ| is unchanged in both directions. -/
 theorem satisfiesPlanarOrientation_iff
     (S : Set Point3) (t : ℝ) (datum : DatumDir) (θ : ℝ) :
     satisfiesPlanarOrientation S t datum θ ↔
@@ -101,9 +101,9 @@ theorem orientation_controls_straightness
     direction, the cylindrical position zone is a cylindrical orientation zone
     with basic angle θ = 0.
 
-    The angle constraint `|cos 0| = 1` is satisfied because parallel unit vectors
+    The angle constraint |cos 0| = 1 is satisfied because parallel unit vectors
     have inner product ±1. The point-set constraint is unchanged: both use
-    `distToLine p L ≤ t/2` with the same axis and the same tolerance. -/
+    distToLine p L ≤ t/2 with the same axis and the same tolerance. -/
 theorem position_controls_cylindrical_orientation
     {S : Set Point3} {t : ℝ} {truePos : Line3} {datum : DatumDir}
     (hpar : truePos.dir = datum.dir ∨ truePos.dir = -datum.dir)
