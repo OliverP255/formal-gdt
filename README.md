@@ -26,14 +26,14 @@ This means that the indicated surface line element must lie within a straightnes
 
 Note: The units, here aren't specified by the GD&T symbol itself. They are chosen by the engineer when drawing the design. All geometric definitions underlying these requirements are described rigorously (but not formally) in ASME Y14.5.1.
 
-For example, Y14.5.1 defines the straightness zone for a derived median line as a cylindrical zone whose diameter is the specified tolerance.
+For example, Y14.5.1 defines the straightness zone for a derived median line as "a cylindrical zone whose diameter is the specified tolerance." This can be visualised with the diagram above. 
 
 ## So why formalise GD&T?
 
 There are a few reasons.
 
 - The underlying mathematics is already precise.
-- GD&T involves many, many interacting geometric definitions which are hard to keep track of.
+- GD&T involves many, many interacting geometric definitions which are hard for engineers/manufacturers to keep track of 
 - The mathematics is difficult to read and verify manually.
 
 Formalisation gives us a way to turn these definitions into objects and propositions that can be checked mechanically.
@@ -57,4 +57,4 @@ By formalising in Lean, we're able to show formally, under what cases, this form
 
 ## In Context
 
-This repo is part of a larger aim to make engineering compliance machine-checkable by formalising engineering standards and tools in Lean 4. 
+This repo is part of my larger aim to make engineering compliance machine-checkable by formalising engineering standards and tools in Lean 4. 
